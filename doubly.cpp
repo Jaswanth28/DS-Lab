@@ -85,6 +85,7 @@ void del()
 					if(rptr->data==sno)
 					{
 						lptr->next=rptr->next;
+                                                rptr->p=lptr;
 						printf("%d is deleted",sno);
 						free(rptr);
 					}
