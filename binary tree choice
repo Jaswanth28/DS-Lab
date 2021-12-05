@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int d;
+	struct  node*r,*l;
+};
+struct node*create()
+{
+	struct node*p;
+	int x;
+	printf("enter root node");
+	scanf("%d",&x);
+	p=(struct  node*)malloc(sizeof(struct  node));
+	if(x==-1)
+	{
+		return NULL;
+	}
+	p->d=x;
+	printf("\nenter left child of %d\n",x);
+	p->l=create();
+	printf("\nenter right child of %d\n",x);
+	p->r=create();
+	return p;
+}
+void preorder(struct node*t)
+{
+	if(t!=NULL)
+	{
+		printf("%d->",t->d);
+		preorder(t->l);
+		preorder(t->r);
+	}
+}
+void inorder(struct node*t)
+{
+	if(t!=NULL)
+	{
+		preorder(t->l);
+		printf("%d->",t->d);
+		preorder(t->r);
+	}
+}
+void postorder(struct node*t)
+{
+	if(t!=NULL)
+	{
+		preorder(t->l);
+		preorder(t->r);
+		printf("%d->",t->d);
+	}
+}
+int main()
+{
+	void preorder(struct  node*);
+	void inorder(struct  node*);
+	void postorder(struct  node*);
+	struct node * y;
+	y=create();
+	int n;
+	printf("1.preorder\n");
+	printf("2.inorder\n");
+	printf("3.postorder\n");
+	printf("enter your choice to vie the tree\t");
+	scanf("%d",&n);
+	switch(n)
+	{
+		case 1: printf("\npreorder\n");
+				preorder(y);
+				break;
+		case 2: printf("\ninorder\n");
+				inorder(y);
+				break;
+		case 3:	printf("\npostorder\n");
+				postorder(y);
+				break;
+	}
+}
