@@ -4,7 +4,6 @@ struct node
 {
 	int data;
 	struct node*next;
-	struct node*p;
 }*front=NULL,*rear=NULL;
 void enqueue(int x)
 {
@@ -14,7 +13,6 @@ void enqueue(int x)
 	{
 		nnode->data=x;
 		nnode->next=NULL;
-		nnode->p=NULL;
 	}
 	if(front==NULL)
 	{
@@ -22,9 +20,9 @@ void enqueue(int x)
 	}
 	else
 	{
-		rear->next=front;
-		rear->p=NULL;
+		rear->next=nnode;
 		rear=nnode;
+		nnode->next=front;
 	}
 }
 void dqueue()
@@ -40,13 +38,14 @@ void dqueue()
 		temp=front;
 		printf("%d is dequeued",temp->data);
 		front=front->next;
+		rear->next=front;
 		free(temp);
 	}
 }
 void display()
 {
 	struct node*temp,*ptr;
-        ptr=front;
+	ptr=front;
 	temp=(struct node*)malloc(sizeof(struct node));
 	if(front==NULL)
 	{
@@ -55,11 +54,12 @@ void display()
 	else
 	{
 		temp=front;
-		while(temp->next!=ptr)
+		do
 		{
 			printf("\n%d",temp->data);
 			temp=temp->next;
-		}
+			if(temp==front);
+		}while(temp!=ptr);
 	}
 }
 int main()
